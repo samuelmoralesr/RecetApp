@@ -1,0 +1,7 @@
+{
+  "name": "RecetApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
