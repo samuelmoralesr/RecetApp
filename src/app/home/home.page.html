@@ -1,20 +1,49 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      <img src="assets/image/logo.png" alt="RecetApp Logo" class="app-logo">
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content fullscreen>
+  <swiper-container 
+    effect="slide" 
+    speed="600" 
+    autoplay-delay="2500" 
+    loop="true" 
+    slides-per-view="1">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <swiper-slide class="slide">
+      <img src="assets/image/Discover-Recipes.jpeg" alt="Discover Recipes" class="slide-image">
+      <div class="slide-text">
+        <h1 class="slide-title">Descubre</h1>
+        <p class="slide-description">Explora recetas únicas, adaptadas a tus gustos.</p>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide class="slide">
+      <img src="assets/image/Share-Your-Creations.jpeg" alt="Share Your Creations" class="slide-image">
+      <div class="slide-text">
+        <h1 class="slide-title">Comparte</h1>
+        <p class="slide-description">Comparte tus platillos y obtén reconocimiento.</p>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide class="slide">
+      <img src="assets/image/Guided-Cooking.jpeg" alt="Guided Cooking" class="slide-image">
+      <div class="slide-text">
+        <h1 class="slide-title">Sigue los Pasos</h1>
+        <p class="slide-description">Sigue pasos visuales y logra resultados increíbles.</p>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide class="slide">
+      <img src="/assets/image/Join-Community.jpeg" alt="Join Community" class="slide-image">
+      <div class="slide-text">
+        <h1 class="slide-title">Únete</h1>
+        <p class="slide-description">Únete a una comunidad de amantes de la cocina.</p>
+      </div>
+    </swiper-slide>
+  </swiper-container>
 </ion-content>
