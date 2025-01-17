@@ -5,9 +5,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-avatar>
-    <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-  </ion-avatar>
+  <div>
+    <img src="assets/image/logo.png" alt="RecetApp Logo" class="app-logo">
+  </div>
 <form [formGroup] ="loginForm" (ngSubmit)="loginUser(loginForm.value)">
   <ion-item>
     <ion-input label="Email" labelPlacement="floating" placeholder="example@domain.com" formControlName="email"></ion-input>
