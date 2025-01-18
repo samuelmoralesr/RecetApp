@@ -8,32 +8,34 @@
   <div>
     <img src="assets/image/logo.png" alt="RecetApp Logo" class="app-logo">
   </div>
-<form [formGroup] ="loginForm" (ngSubmit)="loginUser(loginForm.value)">
-  <ion-item>
-    <ion-input label="Email" labelPlacement="floating" placeholder="example@domain.com" formControlName="email"></ion-input>
-  </ion-item>
-  <div>
-    <ng-container *ngFor ="let error of formErrors.email">
-      <ion-label color="danger" 
-      *ngIf="(loginForm.get('email')?.hasError(error.type) && loginForm.get('email')?.dirty)">
-        {{ error.message }}
-      </ion-label>
-    </ng-container>
-  </div>
-  <ion-item>
-    <ion-input label="Password" type="password" value="password" labelPlacement="floating" formControlName="password"></ion-input>
-  </ion-item>
-  <div>
-    <ng-container *ngFor ="let error of formErrors.password">
-      <ion-label color="danger" 
-      *ngIf="(loginForm.get('password')?.hasError(error.type) && loginForm.get('password')?.dirty)">
-        {{ error.message }}
-      </ion-label>
-    </ng-container>
-  </div>
-  <ion-button
-  type="submit"
-  [disabled]="!loginForm.valid"
-  >Login</ion-button>
-</form>
+  <form [formGroup] ="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+    <ion-item>
+      <ion-input label="Email" labelPlacement="floating" placeholder="example@domain.com" formControlName="email"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor ="let error of formErrors.email">
+        <ion-label color="danger" 
+        *ngIf="(loginForm.get('email')?.hasError(error.type) && loginForm.get('email')?.dirty)">
+          {{ error.message }}
+        </ion-label>
+      </ng-container>
+    </div>
+    <ion-item>
+      <ion-input label="Password" type="password" value="password" labelPlacement="floating" formControlName="password"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor ="let error of formErrors.password">
+        <ion-label color="danger" 
+        *ngIf="(loginForm.get('password')?.hasError(error.type) && loginForm.get('password')?.dirty)">
+          {{ error.message }}
+        </ion-label>
+      </ng-container>
+    </div>
+    <ion-button
+    type="submit"
+    [disabled]="!loginForm.valid"
+    >Login</ion-button>
+  </form>
+
+  <p class="ion-text-center" style ="color: red">{{errorMessage}}</p>
 </ion-content>
