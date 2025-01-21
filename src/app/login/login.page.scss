@@ -58,8 +58,8 @@ ion-input {
 }
   
 ion-button {
-    --background: #0095f6;
-    --background-hover: #007acc;
+    --background: linear-gradient(135deg, #e9ba03, #0e7c51);
+    --background: linear-gradient(135deg, #e9ba03, #0e7c51);
     border-radius: 5px;
     width: 100%;
     padding: 10px;
@@ -70,7 +70,7 @@ ion-button {
 }
   
 ion-button:disabled {
-    --background: #4cafef;
+    --background: linear-gradient(135deg, #e9ba03, #0e7c51);
 }
   
 div {
