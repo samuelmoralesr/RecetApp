@@ -39,4 +39,8 @@
   <!--Agregar campo password (validators y mensajes)-->
   <!--Agregar boton o link para redigir al registro-->
   <p class="ion-text-center" style ="color: red">{{errorMessage}}</p>
+  <p style="text-align: center; margin-top: 16px; color: white;">
+    ¿No tienes una cuenta? 
+    <ion-router-link [routerLink]="['/register']" color="primary">Regístrate</ion-router-link>
+  </p>
 </ion-content>

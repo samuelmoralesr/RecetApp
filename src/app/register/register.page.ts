@@ -66,7 +66,7 @@ export class RegisterPage implements OnInit {
       ])),
       password_confirmation: new FormControl('', Validators.required)
     },{
-      validatos: this.matchPasswords('password', 'password_confirmation')
+      validators: this.matchPasswords('password', 'password_confirmation')
     });
   }
 

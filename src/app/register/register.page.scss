@@ -44,6 +44,11 @@ ion-title, p {
     filter: brightness(0) invert(1);
 }
 
+p {
+    text-align: center; 
+    margin-top: 16px; 
+    color: white
+}
 
 ion-item {
     --background: #262626;
