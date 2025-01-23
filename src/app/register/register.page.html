@@ -16,7 +16,7 @@
     </div>
     <div>
       <ion-item>
-        <ion-input label="Apellido" type= "lastname" labelPlacement="floating" placeholder="Ingresa tu apellido" formControlName="lastname"></ion-input>
+        <ion-input label="Apellido" type= "last_name" labelPlacement="floating" placeholder="Ingresa tu apellido" formControlName="last_name"></ion-input>
       </ion-item>
     </div>
     <div>
@@ -36,7 +36,7 @@
       </ng-container>
     </div>
     <ion-item>
-      <ion-input label="Contraseña" type="password" value="password" labelPlacement="floating" formControlName="password"></ion-input>
+      <ion-input label="Contraseña" type="password" labelPlacement="floating" formControlName="password"></ion-input>
     </ion-item>
     <div>
       <ng-container *ngFor ="let error of formErrors.password">
@@ -47,7 +47,7 @@
       </ng-container>
     </div>   
     <ion-item>
-      <ion-input label="Confirmar Contraseña" type="password" value="password" labelPlacement="floating" formControlName="password"></ion-input>
+      <ion-input label="Confirmar Contraseña" type="password" labelPlacement="floating" formControlName="password_confirmation"></ion-input>
     </ion-item>
     <div>
       <ng-container *ngFor ="let error of formErrors.password">
@@ -63,4 +63,5 @@
     >Registrarte
   </ion-button>  
   </form>
+  <p class="ion-text-center" style ="color: red">{{errorMessage}}</p>
 </ion-content>
