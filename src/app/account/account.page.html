@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+        <img src="assets/image/logo.png" alt="RecetApp Logo" class="app-logo">
+    </ion-title>
+    <ion-buttons>
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="profile-container">
+    <h3>{{user_data.name}} {{user_data.last_name}}</h3>
+    <ion-avatar (click) = "takePhoto()">
+      <img class ="image-post" [src] = "user_data.image"/>
+    </ion-avatar>
+    <p class="profile-info">Usuario: {{user_data.username}}</p>
+    <div class="profile-stats">
+      <div>
+        <p>{{user_data.followed_users.length}}</p>
+        <span>Seguidores</span>
+      </div>
+      <div>
+        <p>{{user_data.following_users.length}}</p>
+        <span>Siguiendo</span>
+      </div>
+    </div>
+  </div>
+</ion-content>
