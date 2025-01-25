@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { PostService } from '../services/post.service';
+import { ModalController } from '@ionic/angular';
+import { AddPostModalPage } from '../add-post-modal/add-post-modal.page';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +12,8 @@ import { PostService } from '../services/post.service';
 export class HomePage {
   posts: any;
   constructor(
-    private postService: PostService
+    private postService: PostService,
+    private modalController: ModalController
   ) {}
 
   ngOnInit(){
@@ -19,6 +22,15 @@ export class HomePage {
       console.log(data);
       this.posts = data;
     })
+  }
+
+  async addPost(){
+    console.log('Add post');
+    const post = await this.modalController.create({
+      component: AddPostModalPage, 
+      componentProps: {}
+    });
+    return await post.present();
   }
 
 }

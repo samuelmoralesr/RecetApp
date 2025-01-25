@@ -19,3 +19,9 @@ ion-content {
   margin: 0 auto;
   display: block;
 }
+
+ion-fab {
+  ion-fab-button{
+    --background: linear-gradient(135deg, #e9ba03, #0e7c51);
+  }
+}
