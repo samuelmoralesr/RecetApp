@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar Información</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup] = "editInfoForm"(ngSubmit) ="editInfo(editInfoForm.value)">
+    <div (click) ="uploadPhone()">
+      <img [src] = "edit_image ? edit_image : 'assets/image/placeholder.png'" formControlName="image"/>
+      <ion-label color="danger"  *ngIf="!edit_image">Haz click para subir una imagen</ion-label>
+    </div>
+
+    <ion-item>
+      <ion-input label="Nombre" labelPlacement="floating" placeholder="Escribe el nombre" formControlName="name" value ="{{user_data.name}}"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Apellido" labelPlacement="floating" placeholder="Escribe el apellido" formControlName="last_name" value="{{user_data.last_name}}"></ion-input>
+    </ion-item>
+
+    <ion-footer>
+      <ion-button
+      type="submit"
+      expand ="full"
+      >
+        Confirmar Edición
+      </ion-button>
+    </ion-footer>
+  </form>
+</ion-content>

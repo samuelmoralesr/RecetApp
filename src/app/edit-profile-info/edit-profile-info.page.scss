@@ -1,0 +1,122 @@
+/* General */
+ion-header {
+    background: linear-gradient(135deg, #e9ba03, #0e7c51); /* Gradiente dorado y verde */
+    border-bottom: 2px solid #ddd;
+  }
+  
+  ion-toolbar ion-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  
+  ion-content {
+    --background: #1c1c1e;
+    padding: 20px;
+  }
+  
+  form div {
+    text-align: center;
+    margin: 30px auto;
+  }
+  
+  form div img {
+    width: 100%; 
+    max-width: 320px; 
+    max-height: 450px;
+    border-radius: 16px;
+    object-fit: contain;
+    cursor: pointer;
+    border: 4px solid #0e7c51;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  form div img:hover {
+    transform: scale(1.05);
+  }
+  
+  form div ion-label {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    font-style: italic;
+    text-align: center;
+  }
+  
+  div p,
+  ion-label[color="danger"] {
+    color: #ff4d4f;
+    font-size: 13px;
+    text-align: left;
+    margin-top: 5px;
+    margin-left: 10px;
+  }
+  
+  ion-item {
+    --background: #292b2d; /* Fondo gris oscuro */
+    --border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+  
+  ion-textarea {
+    --padding-start: 10px;
+    --color: white;
+    font-size: 16px;
+    color: white;
+  }
+  
+  /* Etiquetas populares */
+  .popular-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .popular-tags span {
+    background: linear-gradient(135deg, #e9ba03, #0e7c51);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s;
+  }
+  
+  .popular-tags span:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  ion-footer {
+    margin-top: 20px;
+  }
+  
+  ion-footer ion-button {
+    --background: linear-gradient(135deg, #e9ba03, #0e7c51);
+    --background-activated: #0a5c3e;
+    --border-radius: 25px;
+    --padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+  }
+  
+  ion-footer ion-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+  }
+  
+  ion-footer ion-button:disabled {
+    --background: #555;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  

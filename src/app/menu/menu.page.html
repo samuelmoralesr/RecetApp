@@ -11,6 +11,15 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
+      <ion-item (click)="  home()">
+        <ion-icon name="home-outline"></ion-icon>Home
+      </ion-item>
+      <ion-item (click)="profile()">
+        <ion-icon name="people-outline"></ion-icon>Perfil
+      </ion-item>
+      <ion-item (click)="searchUser()">
+        <ion-icon name="search-outline"></ion-icon>Buscar Usuario
+      </ion-item>
       <ion-item (click)="log_out()">
         <ion-icon name="log-out-outline"></ion-icon>Salir
       </ion-item>

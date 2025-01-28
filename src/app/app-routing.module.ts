@@ -29,6 +29,10 @@ const routes: Routes = [
     path: 'add-post-modal',
     loadChildren: () => import('./add-post-modal/add-post-modal.module').then( m => m.AddPostModalPageModule)
   },
+  {
+    path: 'edit-profile-info',
+    loadChildren: () => import('./edit-profile-info/edit-profile-info.module').then( m => m.EditProfileInfoPageModule)
+  }
 ];
 
 @NgModule({
