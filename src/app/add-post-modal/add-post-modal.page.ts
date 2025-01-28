@@ -79,4 +79,8 @@ export class AddPostModalPage implements OnInit {
     )
   }
 
+  cancelButton(){
+    this.modalController.dismiss({null: null});
+  }
+
 }

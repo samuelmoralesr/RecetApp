@@ -98,4 +98,8 @@ export class EditProfileInfoPage implements OnInit {
     )
   }
 
+  cancelButton(){
+    this.modalController.dismiss({null: null});
+  }
+
 }

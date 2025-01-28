@@ -119,4 +119,12 @@ ion-header {
     cursor: not-allowed;
     opacity: 0.6;
   }
+
+  ion-button.cancel-button {
+    --background: #ff3b30;
+    --background-hover: #e63928;
+    --color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
   
