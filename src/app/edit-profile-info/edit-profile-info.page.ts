@@ -73,6 +73,7 @@ export class EditProfileInfoPage implements OnInit {
     });
     console.log(capturedPhoto.dataUrl);
     this.user_data.image = capturedPhoto.dataUrl;
+    this.edit_image = capturedPhoto.dataUrl;
     this.update();
   }
 

@@ -4,7 +4,7 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { PostService } from '../services/post.service';
 import { Storage } from '@ionic/storage-angular';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 defineCustomElements(window)
 
 @Component({
@@ -28,7 +28,8 @@ export class AddPostModalPage implements OnInit {
     private formBuilder: FormBuilder,
     private postService: PostService,
     private storage: Storage,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private alertController: AlertController
   ) { 
     this.addPostForm = this.formBuilder.group({
       description: new FormControl('', Validators.compose([
@@ -43,34 +44,72 @@ export class AddPostModalPage implements OnInit {
   ngOnInit() {
   }
 
-  async uploadPhone(){
-    console.log('Upload Photo');
-    const uploadPhoto = await Camera.getPhoto({
-      resultType: CameraResultType.DataUrl,
-      source: CameraSource.Camera,
-      quality: 100
-    });
-    this.post_image = uploadPhoto.dataUrl;
-    this.addPostForm.patchValue({
-      image: this.post_image
-    });
+  async takePhoto(source: CameraSource) {
+    try {
+      const capturedPhoto = await Camera.getPhoto({
+        resultType: CameraResultType.DataUrl,
+        source: source,
+        quality: 100
+      });
+      this.post_image = capturedPhoto.dataUrl;
+      this.addPostForm.patchValue({ image: this.post_image });
+    } catch (error) {
+      console.log('Error al tomar la foto', error);
+    }
   }
 
-  async addPost(post_data: any){
-    console.log('Add Post');
-    console.log(post_data);
+  async presentPhotoOptions() {
+    const alert = await this.alertController.create({
+      header: 'Seleccione una opción',
+      message: '¿De dónde desea obtener la imagen?',
+      buttons: [
+        {
+          text: 'Cámara',
+          handler: () => {
+            this.takePhoto(CameraSource.Camera);
+          }
+        },
+        {
+          text: 'Galería',
+          handler: () => {
+            this.takePhoto(CameraSource.Photos);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Publicación',
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  async addPost(post_data: any) {
     const user = await this.storage.get('user');
+    if (!user) {
+      this.presentAlert('No se encontró información del usuario. Intenta nuevamente.');
+      return;
+    }
+
     const post_param = {
       post: {
         description: post_data.description,
         image: post_data.image,
         user_id: user.id
       }
-    }
-    console.log(post_param, 'post para enviar');
+    };
+
     this.postService.createPost(post_param).then(
-      (data: any) => {
-        console.log(data, 'post creado');
+      async (data: any) => {
         data.user = {
           id: user.id,
           name: user.name,
@@ -79,14 +118,15 @@ export class AddPostModalPage implements OnInit {
         this.postService.postCreated.emit(data);
         this.addPostForm.reset();
         this.post_image = null;
+        await this.presentAlert('Tu post se ha publicado correctamente.');
         this.modalController.dismiss();
       },
-      (error) => {
+      async (error) => {
         console.log(error, 'error');
+        await this.presentAlert('Hubo un error al publicar el post. Intenta nuevamente.');
       }
     );
   }
-
   cancelButton(){
     this.modalController.dismiss({null: null});
   }
