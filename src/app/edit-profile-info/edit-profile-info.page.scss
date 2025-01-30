@@ -120,10 +120,20 @@ ion-header {
 
   ion-button.cancel-button {
     --background: #ff3b30;
-    --background-hover: #e63928;
-    --color: white;
+    --background-activated: #e63928; /* Color cuando se presiona */
+    --border-radius: 25px;
+    --padding: 12px;
+    font-size: 16px;
     font-weight: bold;
+    color: white;
     text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+  }
+  
+  ion-button.cancel-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
   }
   
   

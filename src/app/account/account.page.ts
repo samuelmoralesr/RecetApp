@@ -4,8 +4,8 @@ import { Storage } from '@ionic/storage-angular';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import { ModalController } from '@ionic/angular';
-import { AddPostModalPage } from '../add-post-modal/add-post-modal.page';
 import { EditProfileInfoPage } from '../edit-profile-info/edit-profile-info.page';
+import { AlertController } from '@ionic/angular';
 defineCustomElements(window)
 
 @Component({
@@ -19,40 +19,41 @@ export class AccountPage implements OnInit {
     name: '',
     email: '',
     image: '',
-    followed_users: [],
-    following_users: []
+    followees: [],
+    followers: []
   };
   constructor(
     private userService: UserService,
     private storage: Storage,
-    private modalController: ModalController
+    private modalController: ModalController,
+    public  alertController: AlertController
   ) {}
 
-  async ngOnInit() {
-    let user: any = await this.storage.get('user');
-    console.log(user, "usuario");
-    this.userService.getUser(user.id).then(
-      (data: any) =>{
-        console.log(data);
-        this.storage.set('user', data);
-        this.user_data = data;
-      }
-    ).catch(
-      (error) =>{
-        console.log(error);
-      });
-  }
+    async ngOnInit() {
+      let user: any = await this.storage.get('user');
+      console.log(user, "usuario");
+      this.userService.getUser(user.id).then(
+        (data: any) =>{
+          console.log(data);
+          this.storage.set('user', data);
+          this.user_data = data;
+        }
+      ).catch(
+        (error) =>{
+          console.log(error);
+        });
+    }
 
-  async takePhoto(){
-    console.log("take a photo");
+    async takePhoto(source: CameraSource) {
+      console.log('Take Photo');
       const capturedPhoto = await Camera.getPhoto({
         resultType: CameraResultType.DataUrl,
-        source: CameraSource.Camera,
-        quality: 100,
+        source: source,
+        quality: 100
       });
       console.log(capturedPhoto.dataUrl);
       this.user_data.image = capturedPhoto.dataUrl;
-      this.update()
+      this.update();
     }
 
     async update(){
@@ -74,5 +75,34 @@ export class AccountPage implements OnInit {
       });
       return await edit.present();
       
+    }
+
+    async presentPhotoOptions() {
+      const alert = await this.alertController.create({
+        header: "Seleccione una opción",
+        message: "¿De dónde desea obtener la imagen?",
+        buttons:[
+          {
+            text: "Cámara",
+            handler: () => {
+              this.takePhoto(CameraSource.Camera);
+            }
+          },
+          {
+            text: "Galería",
+            handler: () => {
+              this.takePhoto(CameraSource.Photos);
+            }
+          },
+          {
+            text: "Cancelar",
+            role: "cancel",
+            handler: () => {
+              console.log('Cancelado');
+            }
+          }
+        ]
+      });
+      await alert.present();
     }
   }

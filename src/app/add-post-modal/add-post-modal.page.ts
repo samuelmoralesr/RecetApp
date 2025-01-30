@@ -47,7 +47,7 @@ export class AddPostModalPage implements OnInit {
     console.log('Upload Photo');
     const uploadPhoto = await Camera.getPhoto({
       resultType: CameraResultType.DataUrl,
-      source: CameraSource.Photos,
+      source: CameraSource.Camera,
       quality: 100
     });
     this.post_image = uploadPhoto.dataUrl;
@@ -69,14 +69,22 @@ export class AddPostModalPage implements OnInit {
     }
     console.log(post_param, 'post para enviar');
     this.postService.createPost(post_param).then(
-      (data: any) =>{
+      (data: any) => {
         console.log(data, 'post creado');
-        this.modalController.dismiss({null: null});
+        data.user = {
+          id: user.id,
+          name: user.name,
+          image: user.image || 'assets/image/default-avatar.jpg'
+        };
+        this.postService.postCreated.emit(data);
+        this.addPostForm.reset();
+        this.post_image = null;
+        this.modalController.dismiss();
       },
-      (error) =>{
+      (error) => {
         console.log(error, 'error');
       }
-    )
+    );
   }
 
   cancelButton(){

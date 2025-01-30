@@ -6,7 +6,7 @@
 
 <ion-content>
   <form [formGroup] = "editInfoForm"(ngSubmit) ="editInfo(editInfoForm.value)">
-    <div (click) ="uploadPhone()">
+    <div (click) ="presentPhotoOptions()">
       <img [src] = "edit_image ? edit_image : 'assets/image/placeholder.png'" formControlName="image"/>
       <ion-label color="danger"  *ngIf="!edit_image">Haz click para subir una imagen</ion-label>
     </div>

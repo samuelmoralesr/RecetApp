@@ -12,17 +12,17 @@
 <ion-content>
   <div class="profile-container">
     <h3>{{user_data.name}} {{user_data.last_name}}</h3>
-    <ion-avatar (click) = "takePhoto()">
+    <ion-avatar (click) = "presentPhotoOptions()">
       <img class ="image-post" [src] = "user_data.image ? user_data.image : 'assets/image/default-avatar.jpg'" class="image-post"/>
     </ion-avatar>
     <p class="profile-info">Usuario: {{user_data.username}}</p>
     <div class="profile-stats">
       <div>
-        <p>{{user_data.followed_users.length}}</p>
+        <p>{{user_data.followers.length}}</p>
         <span>Seguidores</span>
       </div>
       <div>
-        <p>{{user_data.following_users.length}}</p>
+        <p>{{user_data.followees.length}}</p>
         <span>Siguiendo</span>
       </div>
     </div>
