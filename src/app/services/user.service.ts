@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -8,6 +8,7 @@ export class UserService {
   urlServer = 'http://51.79.26.171';
   httpHeaders = {headers: new HttpHeaders({"Content-Type": "application/json"})};
 
+  userInfoUpdated: EventEmitter<any> = new EventEmitter();
   constructor(
     private http: HttpClient,
   ) { }
@@ -30,25 +31,26 @@ export class UserService {
     });
   }
   updateUser(user: any){
-    const user_params = {
-      user: user
-    }
+    const user_params = { user: user };
+  
     return new Promise((accept, reject) => {
       this.http.post(`${this.urlServer}/update/${user.id}`, user_params, this.httpHeaders).subscribe(
-        (data: any)=>{
-            accept(data);
+        (data: any) => {
+          accept(data);
+          this.userInfoUpdated.emit(data.user);
         },
-        (error) =>{
+        (error) => {
           console.log(error, 'error');
           if(error.status == 500){
-            reject('Error Porfavor intenta mas tarde');
-          }else{
-            reject('Error al obtener los posts')
+            reject('Error, intenta más tarde');
+          } else {
+            reject('Error al actualizar usuario');
           }
         }
-      )
+      );
     });
   }
+  
   listUsers(page: number, perPage: number, query: string = ''){
     const url = `${this.urlServer}/list_users?page=${page}&per_page=${perPage}&query=${query}`;
     return this.http.get(url).toPromise();

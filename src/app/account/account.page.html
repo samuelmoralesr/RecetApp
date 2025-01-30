@@ -10,6 +10,7 @@
 </ion-header>
 
 <ion-content>
+  <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
   <div class="profile-container">
     <h3>{{user_data.name}} {{user_data.last_name}}</h3>
     <ion-avatar (click) = "presentPhotoOptions()">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Storage } from '@ionic/storage-angular';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
@@ -22,11 +22,13 @@ export class AccountPage implements OnInit {
     followees: [],
     followers: []
   };
+  isLoading: boolean = false;
   constructor(
     private userService: UserService,
     private storage: Storage,
     private modalController: ModalController,
-    public  alertController: AlertController
+    public  alertController: AlertController,
+    private cdr: ChangeDetectorRef
   ) {}
 
     async ngOnInit() {
@@ -42,6 +44,13 @@ export class AccountPage implements OnInit {
         (error) =>{
           console.log(error);
         });
+
+        this.userService.userInfoUpdated.subscribe((newUpdate: any) => {
+          console.log('Informacion actualizada:', newUpdate);
+          this.user_data = Object.assign({}, this.user_data, newUpdate);
+          this.storage.set('user', this.user_data);
+          this.cdr.detectChanges();
+        });
     }
 
     async takePhoto(source: CameraSource) {
@@ -56,25 +65,29 @@ export class AccountPage implements OnInit {
       this.update();
     }
 
-    async update(){
+    async update() {
+      this.isLoading = true;
+  
       this.userService.updateUser(this.user_data).then(
-        (data) => {
-          console.log(data);
+        (data: any) => {
+          console.log('Usuario actualizado:', data);
+          this.isLoading = false;
+          this.userService.userInfoUpdated.emit(data);
+          
         }
-      ).catch(
-        (error) =>{
-          console.log(error);
-        });
+      ).catch((error) => {
+        this.isLoading = false;
+        console.log(error);
+      });
     }
 
-    async editInfo(){
+    async editInfo() {
       console.log("edit info");
       const edit = await this.modalController.create({
         component: EditProfileInfoPage,
         componentProps: []
       });
       return await edit.present();
-      
     }
 
     async presentPhotoOptions() {
